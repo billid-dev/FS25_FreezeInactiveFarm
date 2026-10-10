@@ -1,0 +1,15 @@
+# built mod archives (attach them to GitHub Releases instead)
+*.zip
+
+# logs and backups
+*.log
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# editors
+.vscode/
+.idea/
