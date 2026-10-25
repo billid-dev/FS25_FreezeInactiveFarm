@@ -11,7 +11,7 @@
 <p align="center">
   <img alt="Farming Simulator 25" src="https://img.shields.io/badge/Farming%20Simulator-25-4c9a2a">
   <img alt="Multiplayer" src="https://img.shields.io/badge/multiplayer-supported-2b7bb9">
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.7.0-e08a1e">
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0.0-e08a1e">
   <a href="https://discord.gg/gxwC8vUUch"><img alt="Discord" src="https://img.shields.io/badge/discord-join-5865F2?logo=discord&logoColor=white"></a>
 </p>
 
@@ -116,12 +116,12 @@ Nothing is written into the savegame; settings live in the server's `modSettings
 Look for these lines in `log.txt` after the map has loaded (on a dedicated server: the server's log):
 
 ```
-[FarmFreeze] Mod zaladowany (wersja 1.0.7.0).
-[FarmFreeze] Zgodnosc z Bank & Credit: aktywna (...)      <- only if Bank & Credit is installed
+[FarmFreeze] Mod loaded (version 1.0.0.0).
+[FarmFreeze] Bank & Credit compatibility active (...)      <- only if Bank & Credit is installed
 ```
 
 - The first line confirms which version is running. If it is missing or shows another version, the game is using a different file.
-- Any problem inside the mod is logged as `[FarmFreeze] BLAD ...`; please include those lines in bug reports.
+- If the mod hits an error, the game writes a Lua error mentioning `FarmFreeze` to the log; please include those lines (and a few lines around them) in bug reports.
 - For detailed diagnostics set `FarmFreeze.DEBUG = true` at the top of `FarmFreeze.lua` (unzip the mod, edit the file, zip it again with the files at the root of the archive).
 
 ## Reporting bugs
@@ -143,16 +143,27 @@ Repository layout:
 ```
 modDesc.xml              mod descriptor (version, descriptions, changelog)
 FarmFreeze.lua           core logic: freezing, restoring, hooks, Bank & Credit compatibility
-FarmFreezeGui.lua        settings menu, translations, settings synchronisation
+FarmFreezeGui.lua        settings menu, fallback translations, settings synchronisation
 FarmFreezeStateSync.lua  server → client list of frozen farms
-icon.png                 mod icon
+icon_FreezeInactiveFarm.dds   mod icon (DDS without mipmaps, named as ModHub requires)
+icon.png                 logo used by this README (not part of the mod ZIP)
+l10n/l10n_en.xml         English texts (also used for every language without its own file)
+l10n/l10n_pl.xml         Polish texts
 ```
 
 Build the mod ZIP with the files at the **root** of the archive (not inside a folder):
 
 ```bash
-zip FS25_FreezeInactiveFarm.zip modDesc.xml FarmFreeze.lua FarmFreezeGui.lua FarmFreezeStateSync.lua icon.png
+zip -r FS25_FreezeInactiveFarm.zip modDesc.xml FarmFreeze.lua FarmFreezeGui.lua FarmFreezeStateSync.lua icon_FreezeInactiveFarm.dds l10n
 ```
+
+### Adding a translation
+
+1. Copy `l10n/l10n_en.xml` to `l10n/l10n_<code>.xml` (for example `l10n_de.xml`).
+2. Translate the `text="..."` values and keep the `name="farmFreeze_..."` keys unchanged.
+3. Build the ZIP so that it includes the `l10n` folder.
+
+The game picks the file that matches its language; any language without a file uses English. Pull requests with new translations are welcome.
 
 ## Credits
 

@@ -11,7 +11,7 @@
 <p align="center">
   <img alt="Farming Simulator 25" src="https://img.shields.io/badge/Farming%20Simulator-25-4c9a2a">
   <img alt="Multiplayer" src="https://img.shields.io/badge/multiplayer-wspierany-2b7bb9">
-  <img alt="Wersja" src="https://img.shields.io/badge/wersja-1.0.7.0-e08a1e">
+  <img alt="Wersja" src="https://img.shields.io/badge/wersja-1.0.0.0-e08a1e">
   <a href="https://discord.gg/gxwC8vUUch"><img alt="Discord" src="https://img.shields.io/badge/discord-do%C5%82%C4%85cz-5865F2?logo=discord&logoColor=white"></a>
 </p>
 
@@ -116,12 +116,12 @@ Nic nie jest zapisywane w pliku zapisu gry; ustawienia leżą w folderze `modSet
 Szukaj tych linii w `log.txt` po wczytaniu mapy (na serwerze dedykowanym: w logu serwera):
 
 ```
-[FarmFreeze] Mod zaladowany (wersja 1.0.7.0).
-[FarmFreeze] Zgodnosc z Bank & Credit: aktywna (...)      <- tylko gdy Bank & Credit jest zainstalowany
+[FarmFreeze] Mod loaded (version 1.0.0.0).
+[FarmFreeze] Bank & Credit compatibility active (...)      <- tylko gdy Bank & Credit jest zainstalowany
 ```
 
 - Pierwsza linia potwierdza, która wersja jest uruchomiona. Jeśli jej brak lub pokazuje inną wersję, gra używa innego pliku.
-- Każdy problem wewnątrz moda jest zapisywany jako `[FarmFreeze] BLAD ...`; dołącz te linie do zgłoszenia błędu.
+- Jeśli mod napotka błąd, gra zapisze w logu błąd Lua zawierający `FarmFreeze`; dołącz te linie (i kilka linii wokół nich) do zgłoszenia błędu.
 - Szczegółowe logi diagnostyczne włączysz, ustawiając na początku `FarmFreeze.lua` `FarmFreeze.DEBUG = true` (rozpakuj mod, zmień plik i spakuj ponownie, z plikami w głównym katalogu archiwum).
 
 ## Zgłaszanie błędów
@@ -143,16 +143,27 @@ Układ repozytorium:
 ```
 modDesc.xml              deskryptor moda (wersja, opisy, lista zmian)
 FarmFreeze.lua           logika: zamrażanie, przywracanie, hooki, zgodność z Bank & Credit
-FarmFreezeGui.lua        menu ustawień, tłumaczenia, synchronizacja ustawień
+FarmFreezeGui.lua        menu ustawień, zapasowe tłumaczenia, synchronizacja ustawień
 FarmFreezeStateSync.lua  lista zamrożonych farm: serwer → klienci
-icon.png                 ikona moda
+icon_FreezeInactiveFarm.dds   ikona moda (DDS bez mipmap, nazwana tak, jak wymaga ModHub)
+icon.png                 logo używane w tym README (nie wchodzi do ZIP-a moda)
+l10n/l10n_en.xml         teksty angielskie (używane też dla każdego języka bez własnego pliku)
+l10n/l10n_pl.xml         teksty polskie
 ```
 
 ZIP moda buduj z plikami w **głównym katalogu** archiwum (nie w podfolderze):
 
 ```bash
-zip FS25_FreezeInactiveFarm.zip modDesc.xml FarmFreeze.lua FarmFreezeGui.lua FarmFreezeStateSync.lua icon.png
+zip -r FS25_FreezeInactiveFarm.zip modDesc.xml FarmFreeze.lua FarmFreezeGui.lua FarmFreezeStateSync.lua icon_FreezeInactiveFarm.dds l10n
 ```
+
+### Dodawanie tłumaczenia
+
+1. Skopiuj `l10n/l10n_en.xml` jako `l10n/l10n_<kod>.xml` (na przykład `l10n_de.xml`).
+2. Przetłumacz wartości `text="..."`, a klucze `name="farmFreeze_..."` zostaw bez zmian.
+3. Zbuduj ZIP tak, żeby zawierał folder `l10n`.
+
+Gra wybiera plik zgodny ze swoim językiem; język bez pliku używa angielskiego. Pull requesty z nowymi tłumaczeniami są mile widziane.
 
 ## Autor
 

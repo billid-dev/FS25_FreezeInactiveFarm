@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<modDesc descVersion="106">
+<modDesc descVersion="113">
     <author>billiD</author>
-    <version>1.0.7.0</version>
+    <version>1.0.0.0</version>
     <title>
         <en>Farm Freeze - Offline Farm Pause (Multiplayer)</en>
-        <pl>Farm Freeze - Pauza dla Farm Offline (Multiplayer)</pl>
+        <de>Farm Freeze - Pause Für Offline-Farmen (Multiplayer)</de>
+        <pl>Farm Freeze - Pauza Dla Farm Offline (Multiplayer)</pl>
     </title>
     <description>
         <en><![CDATA[Multiplayer mod for groups playing on several farms. When no manager of a farm is online, that farm is frozen until a manager returns.
@@ -27,17 +28,28 @@ Important (when used with Enhanced Animal System): for animals not to die on a f
 
 Settings menu with a switch for every feature, including a separate one for manure and slurry (server admin only, synced to all players). A farm with no manager at all stays frozen permanently. Fields, factories and production outside husbandries are not frozen.
 
-Menu languages: English and Polish. The settings menu follows the game language; every language other than Polish shows English.
+Menu languages: English and Polish. The settings menu follows the game language; every language other than Polish shows English.]]></en>
+        <de><![CDATA[Multiplayer-Mod für Gruppen, die auf mehreren Farmen spielen. Solange kein Manager einer Farm online ist, wird diese Farm eingefroren, bis ein Manager zurückkehrt.
 
-Changelog
-1.0.7.0 - The settings menu is now translated: Polish when the game language is Polish, English in every other language.
-1.0.6.0 - Fixed manure still increasing on frozen farms: the manure production rate (kept in the straw part of a husbandry) was not frozen. Fixed Bank & Credit compatibility: the mod could not see the Bank & Credit classes, so loan payments were still collected for frozen farms; the hook now attaches correctly and is confirmed in the log at start-up.
-1.0.5.0 - Bank & Credit: fixed loans being repaid on frozen farms while the balance stayed frozen. Payments are now skipped when either the loan or the bank balance freeze is on, and taking, repaying or drawing loans is blocked for frozen farms. The compatibility hook is now confirmed in the log at start-up.
-1.0.4.0 - New separate switch in the settings menu for manure and slurry. Added a note that, when used with Enhanced Animal System, animals need some feed and water to survive on a frozen farm. All mod versions on the server and the players must be the same.
-1.0.3.0 - Compatibility with Bank & Credit (FS25_BankCredit): no loan payments or interest for frozen farms. Compatible with Enhanced Animal System. Not compatible with Animal Planner (FS25_AnimalPlanner): with it installed, animals do not generate pallets or products. Extra safeguard so manure and slurry in husbandries do not increase on frozen farms.
-1.0.2.0 - Added optional debug messages for balance and loan (visible only with debug enabled). Author set to billiD.
-1.0.1.0 - Fix: vehicle age and operating hours are now also frozen on dedicated servers (the server sends the list of frozen farms to the clients).
-1.0.0.0 - Initial release.]]></en>
+Eingefroren, solange die Manager der Farm offline sind:
+- Kontostand (Einnahmen, Kosten und Gebühren verändern den Kontostand nicht)
+- Kredite (keine Zinsen)
+- Alter und Betriebsstunden der Fahrzeuge
+- Tierzeit (Altern, Fortpflanzung, Gesundheit)
+- Futter, Wasser und Stroh in den Ställen
+- Produktion der Ställe (Eier, Milch, Wolle)
+- Mist und Gülle in den Ställen (eigener Schalter)
+
+Kompatibilität:
+- Bank & Credit (FS25_BankCredit): kompatibel. Für eingefrorene Farmen werden Kreditraten, Zinsen und Gebühren nicht eingezogen, die Restschuld und die Restlaufzeit bleiben unverändert, und das Aufnehmen, Zurückzahlen oder Abrufen von Krediten ist gesperrt (gilt, wenn der Schalter "Freeze loans" oder "Freeze bank balance" aktiv ist).
+- Enhanced Animal System: kompatibel.
+- Animal Planner (FS25_AnimalPlanner): NICHT kompatibel. Mit installiertem Animal Planner erzeugen Tiere keine Paletten oder Produkte (Eier, Milch, Wolle usw.).
+
+Wichtig (bei Verwendung mit dem Enhanced Animal System): Damit Tiere auf einer eingefrorenen Farm nicht sterben, müssen sie etwas Futter und Wasser haben (falls Wasser benötigt wird). Stelle sicher, dass die Ställe versorgt sind, bevor du den Server verlässt.
+
+Einstellungsmenü mit einem Schalter für jede Funktion, einschließlich eines eigenen für Mist und Gülle (nur der Server-Admin kann ihn ändern, die Einstellungen werden mit allen Spielern synchronisiert). Eine Farm ganz ohne Manager bleibt dauerhaft eingefroren. Felder, Fabriken und Produktion außerhalb der Ställe werden nicht eingefroren.
+
+Menüsprachen: Englisch und Polnisch. Das Einstellungsmenü folgt der Spielsprache; jede andere Sprache als Polnisch zeigt Englisch.]]></de>
         <pl><![CDATA[Mod multiplayer dla ekip grajacych na kilku farmach. Gdy zaden kierownik danej farmy nie jest online, farma jest zamrozona do czasu powrotu kierownika.
 
 Zamrazane, gdy kierownicy farmy sa offline:
@@ -58,19 +70,10 @@ Wazne (we wspolpracy z modem Enhanced Animal System): aby zwierzeta nie umieraly
 
 Menu w Ustawieniach z przelacznikiem dla kazdej funkcji, w tym osobnym dla obornika i gnojowicy (tylko admin serwera, synchronizowane ze wszystkimi graczami). Farma bez zadnego kierownika jest zamrozona na stale. Pola, fabryki i produkcja poza oborami nie sa zamrazane.
 
-Jezyki menu: angielski i polski. Menu ustawien dostosowuje sie do jezyka gry; w kazdym jezyku innym niz polski wyswietla sie po angielsku.
-
-Lista zmian
-1.0.7.0 - Menu ustawien jest teraz tlumaczone: po polsku, gdy gra ma jezyk polski, a w kazdym innym jezyku po angielsku.
-1.0.6.0 - Naprawiono rosnacy obornik na zamrozonych farmach: stawka produkcji obornika (trzymana w czesci obory odpowiedzialnej za slome) nie byla zamrazana. Naprawiono zgodnosc z modem Bank & Credit: mod nie widzial jego klas, wiec raty kredytu byly nadal pobierane dla zamrozonych farm; hook zaklada sie teraz poprawnie i jest potwierdzany w logu przy starcie.
-1.0.5.0 - Bank & Credit: naprawiono splacanie kredytu na zamrozonych farmach przy zamrozonym saldzie. Raty sa teraz pomijane, gdy wlaczone jest zamrazanie kredytow LUB konta bankowego, a zaciaganie, splacanie i wyplacanie kredytu jest zablokowane dla zamrozonych farm. Zalozenie hooka zgodnosci jest teraz potwierdzane w logu przy starcie.
-1.0.4.0 - Nowy, osobny przelacznik w menu ustawien dla obornika i gnojowicy. Dodana uwaga, ze we wspolpracy z modem Enhanced Animal System zwierzeta potrzebuja jakiegos jedzenia i wody, aby przetrwac na zamrozonej farmie. Wszystkie wersje moda na serwerze i u graczy musza byc takie same.
-1.0.3.0 - Zgodnosc z modem Bank & Credit (FS25_BankCredit): brak rat i odsetek kredytu dla zamrozonych farm. Zgodnosc z Enhanced Animal System. Brak zgodnosci z Animal Planner (FS25_AnimalPlanner): przy jego instalacji zwierzeta nie generuja palet ani produktow. Dodatkowe zabezpieczenie, aby obornik i gnojowica w oborach nie rosly na zamrozonych farmach.
-1.0.2.0 - Dodane opcjonalne komunikaty diagnostyczne dla konta i kredytu (widoczne tylko przy wlaczonym trybie debug). Autor: billiD.
-1.0.1.0 - Poprawka: wiek i motogodziny maszyn sa teraz zamrazane takze na serwerach dedykowanych (serwer wysyla klientom liste zamrozonych farm).
-1.0.0.0 - Pierwsza wersja.]]></pl>
+Jezyki menu: angielski i polski. Menu ustawien dostosowuje sie do jezyka gry; w kazdym jezyku innym niz polski wyswietla sie po angielsku.]]></pl>
     </description>
-    <iconFilename>icon.png</iconFilename>
+    <iconFilename>icon_FreezeInactiveFarm.dds</iconFilename>
+    <l10n filenamePrefix="l10n/l10n"/>
     <multiplayer supported="true"/>
     <extraSourceFiles>
         <sourceFile filename="FarmFreeze.lua"/>
